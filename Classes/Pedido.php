@@ -10,18 +10,41 @@ class Pedido{
     public function __construct($nome)
     {
         $this->setNomeCliente($nome);
+        $this->itensConsumidos = array();
     }
     public function calcularTotal(){
+        $total = 0;
 
-       
+        for($i = 0; $i < count($this->getItensConsumidos()); $i++){
+            $total += $this->itensConsumidos[$i]->getPrecoVenda();
+            
+        } 
 
-        return $this->itensConsumidos;
+        
+        return $total;
     }
-    public function mostrarFatura(){
-        echo "--------- Total Fatura ------- <br>";
-        echo "Valor da conta: " . $this->calcularTotal() . "<br>";
-        echo "A taxa de serviço deu : " . $this->getTaxaDeServico() . "<br>";
-        echo "Valor final : " . ($this->taxaDeServico + $this->calcularTotal()) . "<br>";
+    public function mostrarFatura($valorPago){
+
+        $pedidos = $this->calcularTotal();
+        $taxa =  $this->getTaxaDeServico();
+        $total = $pedidos + $taxa;
+
+        if($valorPago >= $total){
+            $troco = $valorPago - $total;
+
+            echo "<br> --------- Total Fatura ------- <br>";
+            echo "Valor da conta R$" . $pedidos . "<br>";
+            echo "A taxa de serviço deu R$" . $taxa . "<br>";
+            echo "Valor final R$" . $total . "<br>";
+            echo "Valor pago foi R$". $valorPago. " resultando em um troco de R$". $troco . "<br>";
+        }else{
+            echo "<br> --------- Total Fatura ------- <br>";
+            echo "Valor da conta R$" . $pedidos . "<br>";
+            echo "A taxa de serviço deu R$" . $taxa . "<br>";
+            echo "Valor final R$" . $total . "<br>";
+            echo "Valor pago não foi suficiente para quitar a conta!! <br>";
+        }
+       
 
 
     }
@@ -46,8 +69,7 @@ class Pedido{
         return $this->itensConsumidos;
     }
     public function setItensConsumidos($i){
-
-        $this->itensConsumidos += $i;
+        array_push ($this->itensConsumidos, $i);
     }
 
 

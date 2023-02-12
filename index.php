@@ -20,14 +20,14 @@
         $p1[1] = new Pizza("Pizza de Muçarela", 100, "05/07/2023", "1.5Kg", "Molho de Tomate", "Muçarela", "Borda não recheada");
         $p1[2] = new Lanche("X-Tudo", 40, "05/08/2023", "1.5Kg", "Todos", "X-tudo", "Frances");
 
-        $cliente1 -> setItensConsumidos($p1[0] -> getPrecoVenda());
-        $cliente1 -> setItensConsumidos($p1[1] -> getPrecoVenda());
-        $cliente1 -> setItensConsumidos($p1[2] -> getPrecoVenda());
+        $cliente1 -> setItensConsumidos($p1[0]);
+        $cliente1 -> setItensConsumidos($p1[1]);
+        $cliente1 -> setItensConsumidos($p1[2]);
 
 
+        // print_r($cliente1);
+       $cliente1 -> mostrarFatura(300);
 
-        $cliente1 -> mostrarFatura();
-        
         ?>
     </pre>
 </body>
